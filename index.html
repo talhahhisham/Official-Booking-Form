@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Official Tour Booking Form</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Add any necessary CSS styles or external stylesheets here -->
+
+  <style>
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.elem-group {
+  margin-bottom: 20px;
+}
+
+.elem-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.small-input {
+    width: 50%; 
+    height: 25px; 
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.elem-group input[type="number"],
+.elem-group input[type="date"],
+.elem-group input[type="email"],
+.elem-group input[type="text"],
+.elem-group select,
+.elem-group textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  margin: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.elem-group select {
+  height: 38px;
+}
+
+.elem-group textarea {
+  resize: vertical;
+}
+
+.elem-group.inlined {
+  display: flex;
+  align-items: center;
+}
+
+.elem-group.inlined label {
+  margin-right: 10px;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+hr {
+  border: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+}
+
+.popup{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  box-shadow: 0 0 10px rgb(0, 0, 0);
+} 
+
+
+  </style>
+</head>
+<body>
+    <h1>Official Tour Booking Form</h1>
+
+  <form action="submit_form.php" method="post">
+    <div class="elem-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="visitor_name" placeholder="Name" pattern="[A-Za-z\s]{3,32}" required>
+    </div>
+    <div class="elem-group">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="visitor_email" placeholder="example@email.com" required>
+    </div>
+    <div class="elem-group">
+      <label for="phone">Contact No</label>
+      <input type="tel" id="phone" name="visitor_phone" placeholder="0123456789" pattern="^(\+?6?01)[02-46-9]-*[0-9]{7}$|^(\+?6?01)[1]-*[0-9]{8}$" required>
+    </div>
+    <div class="elem-group">
+        <label for="tourType">Type of Tour</label>
+        <input type="text" id="tourType" name="visitor_tour" required>
+    </div>
+    <div class="elem-group inlined">
+        <label for="departure-date">Departure Date</label>
+        <input type="date" id="departure-date" name="departure" required>
+        <label for="arrival-date">Arrival Date</label>
+        <input type="date" id="arrival-date" name="arrival" required>
+      </div>
+    
+    
+    
+  <hr>
+    <div class="elem-group inlined">
+      <label for="adult-twin">Adult Twin</label>
+      <input type="number" id="adult-twin" name="total_adult_twin" class="small-input" value="0" min="0" required>
+      <label for="adult-twin-price">Adult Twin Price (RM) </label>
+      <input type="number" id="adult-twin-price" class="small-input" value="100" step="0.01" required>
+      <label for="child-with-bed">Child With Bed</label>
+      <input type="number" id="child-with-bed" name="total_children_with_bed" class="small-input" placeholder="0" value="0" min="0" required>
+      <label for="child-with-bed-price">Child With Bed Price (RM) </label>
+      <input type="number" id="child-with-bed-price" class="small-input" value="100" step="0.01" required>
+    </div>
+    <div class="elem-group inlined">
+        <label for="child-no-bed">Child No Bed</label>
+        <input type="number" id="child-no-bed" name="total_children_no_bed" class="small-input" placeholder="0" value="0" min="0" required>
+        <label for="child-no-bed-price">Child No Bed Price (RM) </label>
+        <input type="number" id="child-no-bed-price" class="small-input" value="100" step="0.01" required>
+        <label for="infant">Infant</label>
+        <input type="number" id="infant" name="total_infant" class="small-input" placeholder="0" value="0" min="0" required>
+        <label for="infant-price">Infant Price (RM) </label>
+        <input type="number" id="infant-price" class="small-input" value="100" step="0.01" required>
+      </div>
+      <div class="elem-group inlined">
+        <label for="single-supplement">Single Supplement</label>
+        <input type="number" id="single-supplement" name="total_singlesupplement" class="small-input" placeholder="0" value="0" min="0" required>
+        <label for="single-supplement-price">Single Supplement Price (RM) </label>
+        <input type="number" id="single-supplement-price" class="small-input" value="100" step="0.01" required>
+        <label for="tipping">Tipping</label>
+        <input type="number" id="tipping" name="total_tipping" class="small-input" placeholder="0" value="0" min="0" required>
+        <label for="tipping-price">Tipping Price (RM) </label>
+        <input type="number" id="tipping-price" class="small-input" value="100" step="0.01" required>
+      </div>
+      <div class="elem-group inlined">
+        <label for="meals-on-board">Meals On Board</label>
+        <input type="number" id="meals-on-board" name="total_meals_on_board" class="small-input" placeholder="0" value="0" min="0" required>
+        <label for="meals-on-board-price">Meals On Board Price (RM) </label>
+        <input type="number" id="meals-on-board-price" class="small-input" value="100" step="0.01" required>
+        <label for="visa">Visa Fee</label>
+        <input type="number" id="visa" name="total_visa" class="small-input" placeholder="0" value="0" min="0" required>
+        <label for="visa-price">Visa Price (RM) </label>
+        <input type="number" id="visa-price" class="small-input" value="100" step="0.01" required>
+      </div>
+      <div class="elem-group inlined">
+        <label for="travel-insurance">Travel Insurance</label>
+        <input type="number" id="travel-insurance" name="total_travel_insurance" class="small-input" placeholder="0" value="0" min="0" required>
+        <label for="travel-insurance-price">Travel Insurance Price (RM) </label>
+        <input type="number" id="travel-insurance-price" class="small-input" value="100" step="0.01" required>
+        <label for="upgrade-business">Upgrade Business</label>
+        <input type="number" id="upgrade-business" name="total_upgrade_business" class="small-input" placeholder="0" value="0" min="0" required>
+        <label for="upgrade-business-price">Upgrade Business Price (RM) </label>
+        <input type="number" id="upgrade-business-price" class="small-input" value="100" step="0.01" required>
+      </div>
+      <div class="elem-group inlined">
+        <label for="levy-tax">Levy Tax</label>
+        <input type="number" id="levy-tax" name="total_levy_tax" class="small-input" placeholder="0" value="0" min="0" required>
+        <label for="levy-tax-price">Levy Tax Price (RM) </label>
+        <input type="number" id="levy-tax-price" class="small-input" value="100" step="0.01" required>
+      </div>
+      <hr>
+      <div class="elem-group">
+        <label for="total-cost">Total Cost (RM)</label>
+        <input type="text" id="total-cost" readonly>
+      </div>
+    <div class="elem-group">
+      <label for="room-selection">Select Room Preference</label>
+      <select id="room-selection" name="room_preference" required>
+        <option value="double">Double</option>
+        <option value="triple">Triple</option>
+      </select>
+    </div>
+    <hr>
+    <div class="elem-group">
+      <label for="message">Remarks</label>
+      <textarea id="message" name="visitor_message" placeholder="Write any remarks here."></textarea>
+    </div>
+    <div> <p> <b>Please read the</b>
+    <a href="#" onclick="showPopup()"><b>Terms and Conditions</b></a> <b>and tick the box below.</b></p> 
+    <div class="overlay" id="overlay" onclick="hidePopup()">
+      <div class="popup">
+        <iframe src="terms.html" width="600" height="600" frameborder="0"></iframe>
+      </div>   
+    </div>
+  </div>
+    <div class="elem-group">
+      <input type="checkbox" id="accept" value="termsncond" required>
+      <label for="accept"> <br> Hereby I, <input type="text" id="name" name="visitor_name" placeholder="Name" pattern="[A-Za-z\s]{3,32}" required> have agreed to the terms and conditions as stated and we have read and understand.</label>
+    </div>
+    <button type="submit">Book</button>
+  </form>
+
+
+  <script>
+
+    // Function to calculate the total cost
+    function calculateTotalCost() {
+      var adultTwinPrice = parseFloat(document.getElementById('adult-twin-price').value);
+      var adultTwinQuantity = parseInt(document.getElementById('adult-twin').value);
+
+      var childWithBedPrice = parseFloat(document.getElementById('child-with-bed-price').value);
+      var childWithBedQuantity = parseInt(document.getElementById('child-with-bed').value);
+
+      var childNoBedPrice = parseFloat(document.getElementById('child-no-bed-price').value);
+      var childNoBedQuantity = parseInt(document.getElementById('child-no-bed').value);
+
+      var infantPrice = parseFloat(document.getElementById('infant-price').value);
+      var infantQuantity = parseInt(document.getElementById('infant').value);
+
+      var singleSupplementPrice = parseFloat(document.getElementById('single-supplement-price').value);
+      var singleSupplementQuantity = parseInt(document.getElementById('single-supplement').value);
+
+      var tippingPrice = parseFloat(document.getElementById('tipping-price').value);
+      var tippingQuantity = parseInt(document.getElementById('tipping').value);
+
+      var mealsOnBoardPrice = parseFloat(document.getElementById('meals-on-board-price').value);
+      var mealsOnBoardQuantity = parseInt(document.getElementById('meals-on-board').value);
+
+      var visaPrice = parseFloat(document.getElementById('visa-price').value);
+      var visaQuantity = parseInt(document.getElementById('visa').value);
+
+      var travelInsurancePrice = parseFloat(document.getElementById('travel-insurance-price').value);
+      var travelInsuranceQuantity = parseInt(document.getElementById('travel-insurance').value);
+
+      var upgradeBusinessPrice = parseFloat(document.getElementById('upgrade-business-price').value);
+      var upgradeBusinessQuantity = parseInt(document.getElementById('upgrade-business').value);
+
+      var levyTaxPrice = parseFloat(document.getElementById('levy-tax-price').value);
+      var levyTaxQuantity = parseInt(document.getElementById('levy-tax').value);
+
+      // Calculate total cost
+      var totalCost = (adultTwinPrice * adultTwinQuantity) +
+        (childWithBedPrice * childWithBedQuantity) +
+        (childNoBedPrice * childNoBedQuantity) +
+        (infantPrice * infantQuantity) +
+        (singleSupplementPrice * singleSupplementQuantity) +
+        (tippingPrice * tippingQuantity) +
+        (mealsOnBoardPrice * mealsOnBoardQuantity) +
+        (visaPrice * visaQuantity) +
+        (travelInsurancePrice * travelInsuranceQuantity) +
+        (upgradeBusinessPrice * upgradeBusinessQuantity) +
+        (levyTaxPrice * levyTaxQuantity);
+
+      // Update the total cost display
+      document.getElementById('total-cost').value = totalCost.toFixed(2);
+    }
+
+    // Event listeners for input elements to trigger total cost calculation
+    var inputElements = document.querySelectorAll('.small-input');
+    for (var i = 0; i < inputElements.length; i++) {
+      inputElements[i].addEventListener('input', calculateTotalCost);
+    }
+
+    //Function to show popup
+    function showPopup() {
+      document.getElementById('overlay').style.display = 'block';
+    }
+
+    //Function to hide popup
+    function hidePopup() {
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+  </script>
+
+</body>
+</html>
