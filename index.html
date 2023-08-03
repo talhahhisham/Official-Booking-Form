@@ -131,19 +131,17 @@ hr {
   <form action="submit_form.php" method="post">
     <div class="elem-group">
       <label for="name">Name</label>
-      <input type="text" id="name" name="visitor_name" placeholder="Name" pattern="[A-Za-z\s]{3,32}" required>
+      <input type="text" id="name" name="name" placeholder="Name" pattern="[A-Za-z\s]{3,32}" required>
     </div>
-    <div class="elem-group">
-      <label for="email">E-mail</label>
-      <input type="email" id="email" name="visitor_email" placeholder="example@email.com" required>
-    </div>
-    <div class="elem-group">
+    <div class="elem-group inlined">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="example@email.com" required>
       <label for="phone">Contact No</label>
-      <input type="tel" id="phone" name="visitor_phone" placeholder="0123456789" pattern="^(\+?6?01)[02-46-9]-*[0-9]{7}$|^(\+?6?01)[1]-*[0-9]{8}$" required>
+      <input type="tel" id="phone" name="phone" placeholder="0123456789" pattern="^(\+?6?01)[02-46-9]-*[0-9]{7}$|^(\+?6?01)[1]-*[0-9]{8}$" required>
     </div>
     <div class="elem-group">
         <label for="tourType">Type of Tour</label>
-        <input type="text" id="tourType" name="visitor_tour" required>
+        <input type="text" id="tourType" name="tour" required>
     </div>
     <div class="elem-group inlined">
         <label for="departure-date">Departure Date</label>
@@ -159,57 +157,57 @@ hr {
       <label for="adult-twin">Adult Twin</label>
       <input type="number" id="adult-twin" name="total_adult_twin" class="small-input" value="0" min="0" required>
       <label for="adult-twin-price">Adult Twin Price (RM) </label>
-      <input type="number" id="adult-twin-price" class="small-input" value="100" step="0.01" required>
+      <input type="number" id="adult-twin-price" name="adult_twin_price" class="small-input" value="0" step="0.01" required>
       <label for="child-with-bed">Child With Bed</label>
-      <input type="number" id="child-with-bed" name="total_children_with_bed" class="small-input" placeholder="0" value="0" min="0" required>
+      <input type="number" id="child-with-bed" name="total_child_with_bed" placeholder="0" class="small-input" value="0" min="0" required>
       <label for="child-with-bed-price">Child With Bed Price (RM) </label>
-      <input type="number" id="child-with-bed-price" class="small-input" value="100" step="0.01" required>
+      <input type="number" id="child-with-bed-price" name="child_with_bed_price" class="small-input" value="0" step="0.01" required>
     </div>
     <div class="elem-group inlined">
         <label for="child-no-bed">Child No Bed</label>
-        <input type="number" id="child-no-bed" name="total_children_no_bed" class="small-input" placeholder="0" value="0" min="0" required>
+        <input type="number" id="child-no-bed" name="total_child_no_bed" placeholder="0" class="small-input" value="0" min="0" required>
         <label for="child-no-bed-price">Child No Bed Price (RM) </label>
-        <input type="number" id="child-no-bed-price" class="small-input" value="100" step="0.01" required>
+        <input type="number" id="child-no-bed-price" name="child_no_bed_price" class="small-input" value="0" step="0.01" required>
         <label for="infant">Infant</label>
-        <input type="number" id="infant" name="total_infant" class="small-input" placeholder="0" value="0" min="0" required>
+        <input type="number" id="infant" name="total_infant" placeholder="0" class="small-input" value="0" min="0" required>
         <label for="infant-price">Infant Price (RM) </label>
-        <input type="number" id="infant-price" class="small-input" value="100" step="0.01" required>
+        <input type="number" id="infant-price" name="infant_price" class="small-input" value="0" step="0.01" required>
       </div>
       <div class="elem-group inlined">
         <label for="single-supplement">Single Supplement</label>
-        <input type="number" id="single-supplement" name="total_singlesupplement" class="small-input" placeholder="0" value="0" min="0" required>
+        <input type="number" id="single-supplement" name="total_single_supplement" placeholder="0" class="small-input" value="0" min="0" required>
         <label for="single-supplement-price">Single Supplement Price (RM) </label>
-        <input type="number" id="single-supplement-price" class="small-input" value="100" step="0.01" required>
+        <input type="number" id="single-supplement-price" name="single_supplement_price" class="small-input" value="0" step="0.01" required>
         <label for="tipping">Tipping</label>
-        <input type="number" id="tipping" name="total_tipping" class="small-input" placeholder="0" value="0" min="0" required>
+        <input type="number" id="tipping" name="total_tipping" placeholder="0" class="small-input" value="0" min="0" required>
         <label for="tipping-price">Tipping Price (RM) </label>
-        <input type="number" id="tipping-price" class="small-input" value="100" step="0.01" required>
+        <input type="number" id="tipping-price" name="tipping_price" class="small-input" value="0" step="0.01" required>
       </div>
       <div class="elem-group inlined">
         <label for="meals-on-board">Meals On Board</label>
-        <input type="number" id="meals-on-board" name="total_meals_on_board" class="small-input" placeholder="0" value="0" min="0" required>
+        <input type="number" id="meals-on-board" name="total_meals_on_board" placeholder="0" class="small-input" value="0" min="0" required>
         <label for="meals-on-board-price">Meals On Board Price (RM) </label>
-        <input type="number" id="meals-on-board-price" class="small-input" value="100" step="0.01" required>
+        <input type="number" id="meals-on-board-price" name="meals_on_board_price" class="small-input" value="0" step="0.01" required>
         <label for="visa">Visa Fee</label>
-        <input type="number" id="visa" name="total_visa" class="small-input" placeholder="0" value="0" min="0" required>
+        <input type="number" id="visa" name="total_visa" placeholder="0" class="small-input" value="0" min="0" required>
         <label for="visa-price">Visa Price (RM) </label>
-        <input type="number" id="visa-price" class="small-input" value="100" step="0.01" required>
+        <input type="number" id="visa-price" name="visa_price" class="small-input" value="0" step="0.01" required>
       </div>
       <div class="elem-group inlined">
         <label for="travel-insurance">Travel Insurance</label>
-        <input type="number" id="travel-insurance" name="total_travel_insurance" class="small-input" placeholder="0" value="0" min="0" required>
+        <input type="number" id="travel-insurance" name="total_travel_insurance" placeholder="0" class="small-input" value="0" min="0" required>
         <label for="travel-insurance-price">Travel Insurance Price (RM) </label>
-        <input type="number" id="travel-insurance-price" class="small-input" value="100" step="0.01" required>
+        <input type="number" id="travel-insurance-price" name="travel_insurance_price" class="small-input" value="0" step="0.01" required>
         <label for="upgrade-business">Upgrade Business</label>
-        <input type="number" id="upgrade-business" name="total_upgrade_business" class="small-input" placeholder="0" value="0" min="0" required>
+        <input type="number" id="upgrade-business" name="total_upgrade_business" placeholder="0" class="small-input" value="0" min="0" required>
         <label for="upgrade-business-price">Upgrade Business Price (RM) </label>
-        <input type="number" id="upgrade-business-price" class="small-input" value="100" step="0.01" required>
+        <input type="number" id="upgrade-business-price" name="upgrade_business_price" class="small-input" value="0" step="0.01" required>
       </div>
       <div class="elem-group inlined">
         <label for="levy-tax">Levy Tax</label>
-        <input type="number" id="levy-tax" name="total_levy_tax" class="small-input" placeholder="0" value="0" min="0" required>
+        <input type="number" id="levy-tax" name="total_levy_tax" placeholder="0" class="small-input" value="0" min="0" required>
         <label for="levy-tax-price">Levy Tax Price (RM) </label>
-        <input type="number" id="levy-tax-price" class="small-input" value="100" step="0.01" required>
+        <input type="number" id="levy-tax-price" name="levy_tax_price" class="small-input" value="0" step="0.01" required>
       </div>
       <hr>
       <div class="elem-group">
@@ -226,7 +224,7 @@ hr {
     <hr>
     <div class="elem-group">
       <label for="message">Remarks</label>
-      <textarea id="message" name="visitor_message" placeholder="Write any remarks here."></textarea>
+      <textarea id="message" name="message" placeholder="Write any remarks here."></textarea>
     </div>
     <div> <p> <b>Please read the</b>
     <a href="#" onclick="showPopup()"><b>Terms and Conditions</b></a> <b>and tick the box below.</b></p> 
@@ -238,7 +236,7 @@ hr {
   </div>
     <div class="elem-group">
       <input type="checkbox" id="accept" value="termsncond" required>
-      <label for="accept"> <br> Hereby I, <input type="text" id="name" name="visitor_name" placeholder="Name" pattern="[A-Za-z\s]{3,32}" required> have agreed to the terms and conditions as stated and we have read and understand.</label>
+      <label for="accept"> <br> Hereby I, <input type="text" id="confirmation-name" name="confirmation_name" placeholder="Name" pattern="[A-Za-z\s]{3,32}" required> have agreed to the terms and conditions as stated and we have read and understand.</label>
     </div>
     <button type="submit">Book</button>
   </form>
