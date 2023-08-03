@@ -1,5 +1,4 @@
 <?php
-// Retrieve form data using $_POST superglobal
 $name = $_POST['name'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
@@ -34,10 +33,6 @@ $roomPreference = $_POST['room_preference'];
 $visitorMessage = $_POST['visitor_message'];
 $visitorName = $_POST['visitor_name'];
 
-// Now you have all the form data in the variables above, and you can process them further as needed.
-// For example, you can perform calculations, database operations, or generate emails using this data.
-
-// To demonstrate, let's calculate the total cost as done in the JavaScript function.
 $totalCost = ($adultTwinPrice * $totalAdultTwin) +
              ($childWithBedPrice * $totalChildWithBed) +
              ($childNoBedPrice * $totalChildNoBed) +
