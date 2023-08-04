@@ -128,7 +128,7 @@ hr {
 <body>
     <h1>Official Tour Booking Form</h1>
 
-  <form action="submit_form.php" method="post">
+  <form>
     <div class="elem-group">
       <label for="name">Name</label>
       <input type="text" id="name" name="name" placeholder="Name" pattern="[A-Za-z\s]{3,32}" required>
@@ -238,7 +238,7 @@ hr {
       <input type="checkbox" id="accept" value="termsncond" required>
       <label for="accept"> <br> Hereby I, <input type="text" id="confirmation-name" name="confirmation_name" placeholder="Name" pattern="[A-Za-z\s]{3,32}" required> have agreed to the terms and conditions as stated and we have read and understand.</label>
     </div>
-    <button type="submit">Book</button>
+    <button type="submit" id="book">Book</button>
   </form>
 
 
@@ -313,6 +313,74 @@ hr {
     }
 
   </script>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+    import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCaoBfovJFYU66gfOiPTs0OCilLAkm6u-U",
+      authDomain: "ibctours-d48ba.firebaseapp.com",
+      databaseURL: "https://ibctours-d48ba-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "ibctours-d48ba",
+      storageBucket: "ibctours-d48ba.appspot.com",
+      messagingSenderId: "431234246882",
+      appId: "1:431234246882:web:ad6464e84e1d852301d6bb"
+        };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+    // get ref to database services
+    const db = getDatabase(app);
+
+    document.getElementById("book").addEventListener('click', function(e){
+      e.preventDefault();
+      
+      set(ref(db, 'user/' + document.getElementById("name").value),
+      {
+
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        tourType: document.getElementById("tourType").value,
+        departureDate: document.getElementById("departure-date").value,
+        arrivalDate: document.getElementById("arrival-date").value,
+        adultTwin: document.getElementById("adult-twin").value,
+        adultTwinPrice: document.getElementById("adult-twin-price").value,
+        childWithBed: document.getElementById("child-with-bed").value,
+        childWithBedPrice: document.getElementById("child-with-bed-price").value,
+        childNoBed: document.getElementById("child-no-bed").value,
+        childNoBedPrice: document.getElementById("child-no-bed-price").value,
+        infant: document.getElementById("infant").value,
+        infantPrice: document.getElementById("infant-price").value,
+        singleSupplement: document.getElementById("single-supplement").value,
+        singleSupplementPrice: document.getElementById("single-supplement-price").value,
+        tipping: document.getElementById("tipping").value,
+        tippingPrice: document.getElementById("tipping-price").value,
+        mealsOnBoard: document.getElementById("meals-on-board").value,
+        mealsOnBoardPrice: document.getElementById("meals-on-board-price").value,
+        visa: document.getElementById("visa").value,
+        visaPrice: document.getElementById("visa-price").value,
+        travelInsurance: document.getElementById("travel-insurance").value,
+        travelInsurancePrice: document.getElementById("travel-insurance-price").value,
+        upgradeBusiness: document.getElementById("upgrade-business").value,
+        upgradeBusinessPrice: document.getElementById("upgrade-business-price").value,
+        levyTax: document.getElementById("levy-tax").value,
+        levyTaxPrice: document.getElementById("levy-tax-price").value,
+        totalCost: document.getElementById("total-cost").value,
+        roomSelection: document.getElementById("room-selection").value,
+        message: document.getElementById("message").value,
+        confirmationName: document.getElementById("confirmation-name").value,
+
+      });
+      alert ("Booking successful.");
+    })
+
+  </script>
+
 
 </body>
 </html>
