@@ -1,3 +1,6 @@
+## THIS FILE IS UNUSED
+
+
 <?php
 $name = $_POST['name'];
 $email = $_POST['email'];
@@ -44,13 +47,5 @@ $totalCost = ($adultTwinPrice * $totalAdultTwin) +
              ($travelInsurancePrice * $totalTravelInsurance) +
              ($upgradeBusinessPrice * $totalUpgradeBusiness) +
              ($levyTaxPrice * $totalLevyTax);
-
-// Note: You should also validate and sanitize the data before using it in any operations to ensure security and avoid vulnerabilities.
-
-// Example of using the total cost
-echo "Total Cost: RM " . number_format($totalCost, 2);
-
-// Here, you can proceed with other actions like storing the data in a database or sending emails, etc.
-// Ensure proper validation, error handling, and security measures are implemented for any data processing.
 
 ?>
