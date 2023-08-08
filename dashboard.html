@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Booking Data</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Tour Type</th>
+                <th>Departure Date</th>
+                <th>Arrival Date</th>
+                <th>Adult Twin</th>
+                <th>Adult Twin Price</th>
+                <th>Child with Bed</th>
+                <th>Child with Bed Price</th>
+                <th>Child No Bed</th>
+                <th>Child No Bed Price</th>
+                <th>Infant</th>
+                <th>Infant Price</th>
+                <th>Single Supplement</th>
+                <th>Single Supplement Price</th>
+                <th>Tipping</th>
+                <th>Tipping Price</th>
+                <th>Meals on Board</th>
+                <th>Meals on Board Price</th>
+                <th>Visa</th>
+                <th>Visa Price</th>
+                <th>Travel Insurance</th>
+                <th>Travel Insurance Price</th>
+                <th>Upgrade Business</th>
+                <th>Upgrade Business Price</th>
+                <th>Levy Tax</th>
+                <th>Levy Tax Price</th>
+                <th>Total Cost</th>
+                <th>Room Selection</th>
+                <th>Message</th>
+                <th>Confirmation Name</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- Data will be inserted here -->
+        </tbody>
+    </table>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+        import { getDatabase, ref, get, child, onValue } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCaoBfovJFYU66gfOiPTs0OCilLAkm6u-U",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+            authDomain: "ibctours-d48ba.firebaseapp.com",
+            databaseURL: "https://ibctours-d48ba-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "ibctours-d48ba",
+            storageBucket: "ibctours-d48ba.appspot.com",
+            messagingSenderId: "431234246882",
+            appId: "1:431234246882:web:ad6464e84e1d852301d6bb"
+         };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        // get ref to database services
+        const db = getDatabase(app);
+
+        const tableBody = document.getElementById("table-body");
+
+        // Fetch data and populate the table
+        const bookingRef = ref(db, 'user');
+        onValue(bookingRef, (snapshot) => {
+            tableBody.innerHTML = ''; // Clear existing data
+
+            snapshot.forEach((childSnapshot) => {
+                const data = childSnapshot.val();
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${data.name}</td>
+                    <td>${data.phone}</td>
+                    <td>${data.email}</td>
+                    <td>${data.tourType}</td>
+                    <td>${data.departureDate}</td>
+                    <td>${data.arrivalDate}</td>
+                    <td>${data.adultTwin}</td>
+                    <td>${data.adultTwinPrice}</td>
+                    <td>${data.childWithBed}</td>
+                    <td>${data.childWithBedPrice}</td>
+                    <td>${data.childNoBed}</td>
+                    <td>${data.childNoBedPrice}</td>
+                    <td>${data.infant}</td>
+                    <td>${data.infantPrice}</td>
+                    <td>${data.singleSupplement}</td>
+                    <td>${data.singleSupplementPrice}</td>
+                    <td>${data.tipping}</td>
+                    <td>${data.tippingPrice}</td>
+                    <td>${data.mealsOnBoard}</td>
+                    <td>${data.mealsOnBoardPrice}</td>
+                    <td>${data.visa}</td>
+                    <td>${data.visaPrice}</td>
+                    <td>${data.travelInsurance}</td>
+                    <td>${data.travelInsurancePrice}</td>
+                    <td>${data.upgradeBusiness}</td>
+                    <td>${data.upgradeBusinessPrice}</td>
+                    <td>${data.levyTax}</td>
+                    <td>${data.levyTaxPrice}</td>
+                    <td>${data.totalCost}</td>
+                    <td>${data.roomSelection}</td>
+                    <td>${data.message}</td>
+                    <td>${data.confirmationName}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        });
+    </script>
+</body>
+</html>
