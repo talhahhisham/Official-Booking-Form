@@ -42,12 +42,8 @@ form {
 }
 
 .small-input {
-  width: 50%;
-  height: 35px;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
 }
 
 .elem-group input[type="tel"],
@@ -79,6 +75,23 @@ form {
   display: flex;
   align-items: center;
 }
+
+    .product-table {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .product-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .product-cell {
+        display: flex;
+        flex-direction: column;
+    }
 
 .elem-group.inlined label {
   margin-right: 10px;
@@ -137,14 +150,16 @@ hr {
     <h1>Official Tour Booking Form</h1>
 
   <form>
-    <div class="elem-group">
+    <div class="elem-group inlined">
       <label for="name">Name</label>
       <input type="text" id="name" name="name" placeholder="Name" pattern="[A-Za-z\s]{3,32}" required>
+      <label for="pic">PIC</label>
+      <input type="text" id="pic" name="pic" placeholder="Name of Person in Charge" pattern="[A-Za-z\s]{3,32}" required>
     </div>
     <div class="elem-group inlined">
       <label for="email">Email</label>
       <input type="email" id="email" name="email" placeholder="example@email.com" required>
-      <label for="phone">Contact No</label>
+      <label for="phone">Contact</label>
       <input type="tel" id="phone" name="phone" placeholder="0123456789" pattern="^(\+?6?01)[02-46-9]-*[0-9]{7}$|^(\+?6?01)[1]-*[0-9]{8}$" required>
     </div>
     <div class="elem-group">
@@ -152,16 +167,16 @@ hr {
         <input type="text" id="tourType" name="tour" required>
     </div>
     <div class="elem-group inlined">
-        <label for="departure-date">Departure Date</label>
+        <label for="departure-date">Departure</label>
         <input type="date" id="departure-date" name="departure" required>
-        <label for="arrival-date">Arrival Date</label>
+        <label for="arrival-date">Arrival</label>
         <input type="date" id="arrival-date" name="arrival" required>
       </div>
     
     
     
   <hr>
-    <div class="elem-group inlined">
+  <div class="elem-group inlined">
       <label for="adult-twin">Adult Twin</label>
       <input type="number" id="adult-twin" name="total_adult_twin" class="small-input" value="0" min="0" required>
       <label for="adult-twin-price">Adult Twin Price (RM) </label>
@@ -217,6 +232,7 @@ hr {
         <label for="levy-tax-price">Levy Tax Price (RM) </label>
         <input type="number" id="levy-tax-price" name="levy_tax_price" class="small-input" value="0" step="0.01" required>
       </div>
+    </div>
       <hr>
       <div class="elem-group">
         <label for="total-cost">Total Cost (RM)</label>
@@ -351,6 +367,7 @@ hr {
       {
 
         name: document.getElementById("name").value,
+        personInChagre: document.getElementById("pic").value,
         phone: document.getElementById("phone").value,
         email: document.getElementById("email").value,
         tourType: document.getElementById("tourType").value,
