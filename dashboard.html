@@ -6,56 +6,98 @@
     <title>Booking Data</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
         }
-        
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
             margin-top: 20px;
-        }
-        
-        h1 {
-            text-align: center;
+            border: 1px solid #ddd;
+            background-color: white;
         }
 
         th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
+            border: 1px solid #ddd;
             padding: 8px;
         }
-        
+
         th {
             background-color: #f2f2f2;
         }
-        
+
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-        
+
         tr:hover {
             background-color: #ddd;
         }
+
+        table#table-body {
+            margin-top: 0;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        #total-stats th,
+        #total-stats td,
+        #person-in-charge-stats th,
+        #person-in-charge-stats td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #total-stats th,
+        #person-in-charge-stats th {
+            background-color: #f2f2f2;
+        }
+
+        #total-stats tr:nth-child(even),
+        #person-in-charge-stats tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #total-stats tr:hover,
+        #person-in-charge-stats tr:hover {
+            background-color: #ddd;
+        }
+
+
     </style>
 </head>
 <body>
     <h1>Booking Data</h1>
+    <div style="overflow-x: scroll;">
     <table border="1">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Email</th>
-                <th>Person in Charge</th>
+                <th>PIC</th>
                 <th>Type of Tour</th>
-                <th>Departure Date</th>
-                <th>Arrival Date</th>
+                <th>Date (Departure)</th>
+                <th>Date (Arrival)</th>
                 <th>Adult Twin</th>
                 <th>Adult Twin Price</th>
-                <th>Child with Bed</th>
-                <th>Child with Bed Price</th>
+                <th>Child With Bed</th>
+                <th>Child With Bed Price</th>
                 <th>Child No Bed</th>
                 <th>Child No Bed Price</th>
                 <th>Infant</th>
@@ -64,8 +106,8 @@
                 <th>Single Supplement Price</th>
                 <th>Tipping</th>
                 <th>Tipping Price</th>
-                <th>Meals on Board</th>
-                <th>Meals on Board Price</th>
+                <th>Meals on Bed</th>
+                <th>Meals on Bed Price</th>
                 <th>Visa</th>
                 <th>Visa Price</th>
                 <th>Travel Insurance</th>
@@ -81,6 +123,36 @@
             </tr>
         </thead>
         <tbody id="table-body">
+            <!-- Data will be inserted here -->
+        </tbody>
+    </table>
+</div>
+
+    <h2>Total Bookings and Total Pax</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Total Bookings</th>
+                <th>Total Pax</th>
+            </tr>
+        </thead>
+        <tbody id="total-stats">
+            <tr>
+                <td id="total-bookings">0</td>
+                <td id="total-pax">0</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Person In Charge and Total Clients</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Person In Charge</th>
+                <th>Total Clients</th>
+            </tr>
+        </thead>
+        <tbody id="person-in-charge-stats">
             <!-- Data will be inserted here -->
         </tbody>
     </table>
@@ -152,7 +224,43 @@
                     <td>${data.confirmationName}</td>
                 `;
                 tableBody.appendChild(row);
+
+                let totalBookings = 0;
+                let totalPax = 0;
+                const personInChargeStats = {};
+
+                snapshot.forEach((childSnapshot) => {
+                const data = childSnapshot.val();
+
+                // Calculate total bookings and total pax
+                totalBookings++;
+                totalPax += parseInt(data.adultTwin) + parseInt(data.childWithBed) + parseInt(data.childNoBed) + parseInt(data.infant);
+
+                // Count clients for each Person In Charge
+                if (personInChargeStats[data.personInCharge]) {
+                    personInChargeStats[data.personInCharge]++;
+                } else {
+                    personInChargeStats[data.personInCharge] = 1;
+                }
+
             });
+
+             // Update total bookings and total pax
+             document.getElementById("total-bookings").textContent = totalBookings;
+            document.getElementById("total-pax").textContent = totalPax;
+
+            // Populate Person In Charge and Total Clients table
+            const personInChargeStatsBody = document.getElementById("person-in-charge-stats");
+            personInChargeStatsBody.innerHTML = '';
+            for (const personInCharge in personInChargeStats) {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${personInCharge}</td>
+                    <td>${personInChargeStats[personInCharge]}</td>
+                `;
+                personInChargeStatsBody.appendChild(row);
+            }
+        }); 
         });
     </script>
 </body>

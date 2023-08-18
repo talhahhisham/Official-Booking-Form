@@ -174,7 +174,15 @@ hr {
       <label for="name">Name</label>
       <input type="text" id="name" name="name" placeholder="Name" pattern="[A-Za-z\s]{3,32}" required>
       <label for="pic">PIC</label>
-      <input type="text" id="pic" name="pic" placeholder="Name of Person in Charge" pattern="[A-Za-z\s]{3,32}" required>
+      <select id="pic" name="pic" placeholder="Name of Person in Charge" pattern="[A-Za-z\s]{3,32}" required>
+        <option value="Rizal">Rizal</option>
+        <option value="Talhah">Talhah</option>
+        <option value="Syahir">Syahir</option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+      </select>
     </div>
     <div class="elem-group inlined">
       <label for="email">Email</label>
@@ -184,7 +192,37 @@ hr {
     </div>
     <div class="elem-group">
         <label for="tourType">Type of Tour</label>
-        <input type="text" id="tourType" name="tour" required>
+        <select id="tourType" name="tour" required>
+          <option value="10 Days 07 Nights Turkey">10 Days 07 Nights Turkey</option>
+          <option value="13 Days 10 Nights Balkan 9">13 Days 10 Nights Balkan 9</option>
+          <option value="10 Days 07 Nights Balkan 5">10 Days 07 Nights Balkan 5</option>
+          <option value="10 Days 07 Nights Europe 5 Countries">10 Days 07 Nights Europe 5 Countries</option>
+          <option value="10 Days 07 Nights Switzerland">10 Days 07 Nights Switzerland</option>
+          <option value="08 Days 05 Nights Cairo/Alexandria">08 Days 05 Nights Cairo/Alexandria</option>
+          <option value="05 Days 04 Nights Dubai + Abu Dhabi">05 Days 04 Nights Dubai + Abu Dhabi</option>
+          <option value="09 Days 07 Nights 6 Countries Balkan + Greece">09 Days 07 Nights 6 Countries Balkan + Greece</option>
+          <option value="09 Days 07 Nights Turkey Sanliurfa City Tour">09 Days 07 Nights Turkey Sanliurfa City Tour</option>
+          <option value="05 Days 04 Nights Wonder of Korea">05 Days 04 Nights Wonder of Korea</option>
+          <option value="13 Days 10 Nights Morocco, Spain & Portugal">13 Days 10 Nights Morocco, Spain & Portugal</option>
+          <option value="13 Days 10 Nights Discovery of Eastern Europe + Balkan">13 Days 10 Nights Discovery of Eastern Europe + Balkan</option>
+          <option value="04 Days 03 Nights Bali">04 Days 03 Nights Bali</option>
+          <option value="04 Days 03 Nights Vietnam Danang">04 Days 03 Nights Vietnam Danang</option>
+          <option value="10 Days 07 Nights Egyptian Cruise + Cairo">10 Days 07 Nights Egyptian Cruise + Cairo</option>
+          <option value="08 Days 06 Nights Kashmir + Taj Mahal">08 Days 06 Nights Kashmir + Taj Mahal</option>
+          <option value="04 Days 03 Nights Jakarta/Bandung">04 Days 03 Nights Jakarta/Bandung</option>
+          <option value="05 Days 04 Nights Ho Chi Minh - Mui Ne - Dalat">05 Days 04 Nights Ho Chi Minh - Mui Ne - Dalat</option>
+          <option value="10 Days 07 Nights Jordan & Jerusalem">10 Days 07 Nights Jordan & Jerusalem</option>
+          <option value="04 Days 03 Nights Yogjakarta">04 Days 03 Nights Yogjakarta</option>
+          <option value="10 Days 07 Nights Italy & Switzerland">10 Days 07 Nights Italy & Switzerland</option>
+          <option value="06 Days 04 Nights Discovery Tokyo + Mt. Fuji">06 Days 04 Nights Discovery Tokyo + Mt. Fuji</option>
+          <option value="05 Days 04 Nights Hong Kong">05 Days 04 Nights Hong Kong</option>
+          <option value="05 Days 04 Nights Taiwan">05 Days 04 Nights Taiwan</option>
+          <option value="12 Days 09 Nights Morocco & Spain">12 Days 09 Nights Morocco & Spain</option>
+          <option value="12 Days 10 Nights Hunza Valley">12 Days 10 Nights Hunza Valley</option>
+          <option value="09 Days 07 Nights Iran Classic">09 Days 07 Nights Iran Classic</option>
+          <option value="08 Days 06 Nights Uzbekistan Tour">08 Days 06 Nights Uzbekistan Tour</option>
+          <option value="06 Days 04 Nights Golden Route Osaka + Tokyo">06 Days 04 Nights Golden Route Osaka + Tokyo</option>
+        </select>
     </div>
     <div class="elem-group inlined">
         <label for="departure-date">Departure</label>
@@ -261,6 +299,7 @@ hr {
     <div class="elem-group">
       <label for="room-selection">Select Room Preference</label>
       <select id="room-selection" name="room_preference" required>
+        <option value="single">Single</option>
         <option value="double">Double</option>
         <option value="triple">Triple</option>
       </select>
@@ -380,14 +419,38 @@ hr {
     // get ref to database services
     const db = getDatabase(app);
 
+      // Function to check if all required inputs are filled
+  function areAllInputsFilled() {
+    const requiredInputs = [
+      "name", "pic", "phone", "email", "tourType",
+      "departure-date", "arrival-date", "adult-twin",
+      "adult-twin-price", "child-with-bed", "child-with-bed-price",
+      "child-no-bed", "child-no-bed-price", "infant",
+      "infant-price", "single-supplement", "single-supplement-price",
+      "tipping", "tipping-price", "meals-on-board",
+      "meals-on-board-price", "visa", "visa-price",
+      "travel-insurance", "travel-insurance-price",
+      "upgrade-business", "upgrade-business-price",
+      "levy-tax", "levy-tax-price", "total-cost",
+      "room-selection", "accept", "confirmation-name"
+    ];
+
+    for (const inputId of requiredInputs) {
+      const input = document.getElementById(inputId);
+      if (!input.value) {
+        return false;
+      }
+    }
+    return true;
+  }
+
     document.getElementById("book").addEventListener('click', function(e){
       e.preventDefault();
       
-      set(ref(db, 'user/' + document.getElementById("name").value),
-      {
-
+      if (areAllInputsFilled()) {
+      set(ref(db, 'user/' + document.getElementById("name").value), {
         name: document.getElementById("name").value,
-        personInChagre: document.getElementById("pic").value,
+        personInCharge: document.getElementById("pic").value,
         phone: document.getElementById("phone").value,
         email: document.getElementById("email").value,
         tourType: document.getElementById("tourType").value,
@@ -419,10 +482,13 @@ hr {
         roomSelection: document.getElementById("room-selection").value,
         message: document.getElementById("message").value,
         confirmationName: document.getElementById("confirmation-name").value,
-
       });
-      alert ("Booking successful.");
-    })
+      alert("Booking successful.");
+    } else {
+      alert("Please fill in all required inputs.");
+    }
+  });
+
 
   </script>
 
